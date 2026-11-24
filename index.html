@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Standings Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>League Standings</h1>
+            <p>A simple dashboard to view and sort your favorite sports leagues.</p>
+        </header>
+
+       
+        <div id="error-message" class="error hidden"></div>
+
+        
+        <div class="controls">
+            <label for="league-select">Filter by League:</label>
+            <select id="league-select">
+                <option value="4328">English Premier League</option>
+                <option value="4387">NBA</option>
+            </select>
+        </div>
+
+      
+        <table id="standings-table">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Team</th>
+                    
+                    <th class="sortable" data-sort="played">Played ⇅</th>
+                    <th class="sortable" data-sort="win">Wins ⇅</th>
+                    <th class="sortable" data-sort="draw">Draws ⇅</th>
+                    <th class="sortable" data-sort="loss">Losses ⇅</th>
+                    <th class="sortable" data-sort="gd">Goal Diff ⇅</th>
+                    <th class="sortable" data-sort="points">Points ⇅</th>
+                </tr>
+            </thead>
+         
+            <tbody id="table-body">
+            </tbody>
+        </table>
+    </div>
+    
+  
+    <script src="app.js"></script>
+</body>
+</html>
