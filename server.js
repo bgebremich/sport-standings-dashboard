@@ -1,7 +1,7 @@
-const http = require('node:http');
-const https = require('node:https');
-const fs= require ('node:fs');
-const path = require ('node:path');
+const http = require('http');
+const https = require('https');
+const fs= require ('fs');
+const path = require ('path');
 const envPath = path.join(__dirname, '.env');
 let API_KEY = '123'; 
 if (fs.existsSync(envPath)){
@@ -9,7 +9,7 @@ if (fs.existsSync(envPath)){
     const match = envFile.match(/SPORTS_API_KEY=(.*)/);
     if (match) API_KEY = match[1].trim();
 }
-////
+
 const PORT = 3000;
 const server = http.createServer((req, res) => {
     console.log (`${req.method} ${req.url}`);
