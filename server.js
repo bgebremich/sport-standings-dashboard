@@ -16,6 +16,8 @@ const PUBLIC_FILES = {
     '/app.js': { file: 'app.js', type: 'application/javascript' },
     '/style.css': { file: 'style.css', type: 'text/css' }
 };
+const cache = {};
+const CACHE_MS = 5 * 60 * 1000;
 
 const PORT = 3000;
 const server = http.createServer((req, res) => {
@@ -30,6 +32,12 @@ const server = http.createServer((req, res) => {
             return;
         }
        const apiURL = `https://api.football-data.org/v4/competitions/${leagueCode}/standings`;
+               const cached = cache[leagueCode];
+        if (cached && Date.now() - cached.time < CACHE_MS) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(cached.data);
+            return;
+        }
         https.get(apiURL, { headers: { 'X-Auth-Token': API_KEY } }, (apiRes) => {let data='';
             apiRes.on('data', (chunk) => data+=chunk);
             apiRes.on('end', () => {
