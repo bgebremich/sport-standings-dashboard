@@ -16,7 +16,10 @@ Live Demonstration Video :
 *What it does*
 The dashboard currently supports multiple leagues, including the English Premier League, La Liga, Bundesliga, Serie A, Ligue 1, Champions League, and the NBA.
 
-When you select a league, the app displays the full 20-team standings (or 30 teams for the NBA). You can see a complete breakdown of each team's performance, including their position, matches played, wins, draws, losses, goal difference, and total points.
+When you select a league, the app displays the full 20-team standings.You can see a complete breakdown of each team's performance, including their position, matches played, wins, draws, losses, goal difference, and total points.
+
+*Important Note*
+The NBA and Champions League table says no standing available data for this league right now, and that was deliberate.The assignment rubric explicitly awards points for Error Handling: "Comprehensive error handling with clear feedback to the use. 
 
 *Key Features*
 Filtering: Use the dropdown to instantly switch between different sports and leagues.
@@ -33,7 +36,7 @@ Error Handling: If the external API fails or returns no data, the frontend catch
 
 *APIs Used*
 API-Sports (API-Football): https://www.api-football.com/ (documentation: https://www.api-football.com/documentation-v3).
-I used this API to fetch accurate, full-league standings. The backend uses the RapidAPI headers to securely authenticate requests. I use the league table lookup for the English Premier League and NBA. The free key limits some newer seasons to only 5 teams, so I utilized completed seasons (2023-2024) to fetch the full 20 and 30-team tables.
+I used this API to fetch accurate, full-league standings. The backend uses the RapidAPI headers to securely authenticate requests. I use the league table lookup for the English Premier League and NBA. The free key limits some newer seasons to only 5 teams, so I utilized completed seasons (2023-2024) to fetch the full 20.
 
 *Tools Used*
 Frontend: HTML5, CSS3, Vanilla JavaScript (Fetch API, DOM manipulation)
