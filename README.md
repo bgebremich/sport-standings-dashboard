@@ -5,3 +5,7 @@ A web dashboard that shows live football league standings. Users can view a leag
 
 APIs used
 TheSportsDB, free sports data API: https://www.thesportsdb.com/ (documentation: https://www.thesportsdb.com/documentation). I use the league table lookup for the English Premier League. TODO: confirm the endpoint, season behaviour and free-key limits in their docs, and write them here. The free key returned only 5 teams in my testing, which appears to be a limit of the free tier.
+
+ D## 🚀 Live Demo
+*   **Load Balancer URL (Primary):** [http://18.175.136.136](http://18.175.136.136)
+*   **Custom Domain:** [http://sportstanding.tech/tech](http://http://sportstanding.tech/) 
