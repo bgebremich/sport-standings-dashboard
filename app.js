@@ -3,7 +3,8 @@
 let standingsData =[];
 
 
-async function fetchStandings (leagueId = '4328') {const errorDiv = document.getElementById('error-message');
+async function fetchStandings (leagueId = 'PL') {
+    const errorDiv = document.getElementById('error-message');
     const tableBody = document.getElementById('table-body');
     errorDiv.classList.add('hidden');
     tableBody.innerHTML = '<tr><td colspan="8">Loading data...</td></tr>';
@@ -14,8 +15,8 @@ async function fetchStandings (leagueId = '4328') {const errorDiv = document.get
             throw new Error ('API returned an error');
         }
         const data = await response.json();
-        if (data.table && data.table.length > 0) {
-            standingsData = data.table;
+                if (data.standings && data.standings[0].table.length > 0) {
+            standingsData = data.standings[0].table;
             renderTable (standingsData);
         } else {
             throw new Error ('No data found');
@@ -33,20 +34,20 @@ function renderTable(data) {
     data.forEach(team => {
         const row=document.createElement('tr');
         
-        row.innerHTML = `
-        <td>${team.intRank}</td>
+              row.innerHTML = `
+        <td>${team.position}</td>
         <td class="team-name">
-        <img src="${team.strBadge}" alt="badge" style="height: 20px; margin-right :8px;">
-            ${team.strTeam}
+        <img src="${team.team.crest}" alt="badge" style="height: 20px; margin-right :8px;">
+            ${team.team.name}
             </td>
-            <td>${team.intPlayed}</td>
-            <td>${team.intWin}</td>
-            <td>${team.intDraw}</td>
-            <td>${team.intLoss}</td>
-            <td>${team.intGoalDifference}</td>
-            <td><strong>${team.intPoints}</strong></td>
-            `;
-            tableBody.appendChild(row);
+            <td>${team.playedGames}</td>
+            <td>${team.won}</td>
+            <td>${team.draw}</td>
+            <td>${team.lost}</td>
+            <td>${team.goalDifference}</td>
+            <td><strong>${team.points}</strong></td>
+            `; 
+                    tableBody.appendChild(row);
     });
 }
 function sortTable(column) {
@@ -54,16 +55,12 @@ function sortTable(column) {
     const direction = isAscending ? 1 : -1;
 
     standingsData.sort((a, b) => {
-        let valA, valB;
+       
 
-        if (column === 'points') { valA = parseInt(a.intPoints); valB = parseInt(b.intPoints); }
-        else if (column === 'played') { valA = parseInt(a.intPlayed); valB = parseInt(b.intPlayed); }
-        else if (column === 'win') { valA = parseInt(a.intWin); valB = parseInt(b.intWin); }
-        else if (column === 'draw') { valA = parseInt(a.intDraw); valB = parseInt(b.intDraw); }
-        else if (column === 'loss') { valA = parseInt(a.intLoss); valB = parseInt(b.intLoss); }
-        else if (column === 'gd') { valA = parseInt(a.intGoalDifference); valB = parseInt(b.intGoalDifference); }
-        
-        if (valA < valB) return -1 * direction;
+        const fields = { points: 'points', played: 'playedGames', win: 'won', draw: 'draw', loss: 'lost', gd: 'goalDifference' };
+        const valA = a[fields[column]];
+        const valB = b[fields[column]];
+                if (valA < valB) return -1 * direction;
         if (valA > valB) return 1 * direction;
         return 0;
     });
